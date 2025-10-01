@@ -6,6 +6,7 @@ import { Brain, DollarSign, Eraser, Plus, Settings, SquareMousePointer } from 'l
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import type { Node, Edge } from '@xyflow/react';
+import { nodeTypes } from './canvas/node-types';
 
 const initialNodes: Node[] = [];
 const initialEdges: Edge[] = [];
@@ -15,7 +16,7 @@ const engines = [
     id: 'reconciliation-engine',
     name: 'Reconciliation Engine',
     initNodes: [
-      { id: 'n1', position: { x: 0, y: 0 }, data: { label: 'Reconciliation Engine' } },
+      { id: 'start-node', type: 'startNode', position: { x: 0, y: 0 } },
       { id: 'n2', position: { x: 0, y: 100 }, data: { label: 'Node 2' } },
     ],
     initEdges: [{ id: 'n1-n2', source: 'n1', target: 'n2', animated: true, type: 'bezier' }],
@@ -24,7 +25,7 @@ const engines = [
     id: 'chargeback-engine',
     name: 'Chargeback Engine',
     initNodes: [
-      { id: 'n1', position: { x: 0, y: 0 }, data: { label: 'Chargeback Engine' } },
+      { id: 'start-node', type: 'startNode', position: { x: 0, y: 0 } },
       { id: 'n2', position: { x: -100, y: 100 }, data: { label: 'Node 2' } },
       { id: 'n3', position: { x: 100, y: 100 }, data: { label: 'Node 3' } },
     ],
@@ -84,6 +85,7 @@ function Canvas() {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        nodeTypes={nodeTypes}
         fitView
       >
         <Background />
